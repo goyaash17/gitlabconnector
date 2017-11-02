@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<namespace xmlns="http://www.mulesoft.org/schema/mule/tooling.attributes" xmlns:mule="http://www.mulesoft.org/schema/mule/core" url="http://www.mulesoft.org/schema/mule/gitlabconnect" prefix="gitlabconnect">
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Gitlabconnect" description="" icon="" localId="parentConfig" image="" abstract="true" extends="http://www.mulesoft.org/schema/mule/gitlabconnect/abstractGitlabconnectConnectorGeneric"></global-cloud-connector>
+  <global-cloud-connector versions="[3.5.0,8.0.0]" caption="Gitlabconnect: Configuration" description="Global Configuration configuration information." icon="icons/theme.classic/gitlabconnect-connector-small.png" localId="config" image="icons/theme.classic/gitlabconnect-connector-large.png" abstract="false" extends="http://www.mulesoft.org/schema/mule/gitlabconnect/parentConfig" connectivityTesting="off" metaData="dynamic" metaDataKeyDisplay="DISPLAY_NAME" supportsUserDefinedMetaData="false">
+    <attribute-category caption="General" description="Gitlabconnect configuration properties.">
+      <group id="gitlabconnectGenericProperties" caption="Basic Settings">
+        <name name="name" caption="Name" description="Give a name to this configuration so it can be later referenced by config-ref." required="true"></name>
+      </group>
+      <group id="general" caption="General">
+        <useMetaData name="useMetaData" caption="useMetaData"></useMetaData>
+        <string defaultValue="Hello" name="greeting" caption="Greeting" description="Greeting message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+        <string defaultValue="How are you?" name="reply" caption="Reply" description="Reply message." supportsExpressions="false" required="false" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </global-cloud-connector>
+  <cloud-connector caption="Abstractgitlabconnectconnectorgeneric" description="Interact with Gitlabconnect." icon="icons/theme.classic/gitlabconnect-connector-small.png" localId="abstractGitlabconnectConnectorGeneric" image="icons/theme.classic/gitlabconnect-connector-large.png" abstract="true">
+    <attribute-category caption="General" description="General.">
+      <group id="abstractGitlabconnectConnectorGeneric" caption="Basic Settings">
+        <globalRef requiredType="http://www.mulesoft.org/schema/mule/gitlabconnect/config" name="config-ref" caption="Connector Configuration" description="Specify which configuration to use for this invocation." required="true"></globalRef>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector versions="[3.5.0,8.0.0]" aliasId="org.mule.tooling.ui.modules.core.pattern.gitlabconnect" caption="Gitlabconnect" description="" icon="icons/theme.classic/gitlabconnect-connector-small.png" localId="gitlabconnect-connector" image="icons/theme.classic/gitlabconnect-connector-large.png" extends="http://www.mulesoft.org/schema/mule/gitlabconnect/abstractGitlabconnectConnectorGeneric">
+    <attribute-category caption="General" description="General.">
+      <group id="gitlabconnectConnectorGeneric" caption="Basic Settings">
+        <modeSwitch alwaysCombo="true" name="Gitlabconnect operations to execute" caption="Operation" description="Operation.">
+          <no-operation abstractElement="http://www.mulesoft.org/schema/mule/gitlabconnect/abstractGitlabconnectConnectorGeneric" versions="[3.5.0,8.0.0]" connector-name="processor"></no-operation>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gitlabconnect/add-entity" modeLabel="Add entity"></mode>
+          <mode modeId="http://www.mulesoft.org/schema/mule/gitlabconnect/greet" modeLabel="Greet"></mode>
+        </modeSwitch>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.util.Map&lt;java.lang.String,java.lang.Object&gt;" categories="DataSenseResolver" caption="Add Entity" icon="icons/theme.classic/gitlabconnect-connector-small.png" localId="add-entity" image="icons/theme.classic/gitlabconnect-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gitlabconnect/abstractGitlabconnectConnectorGeneric" metaData="dynamic">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <type-chooser associatedConfig="config-ref" affects="AUTO" name="key" caption="Key" description="Key to be used to populate the entity." supportsExpressions="true" required="true" javaType="java.lang.String"></type-chooser>
+        <element-controller-map mapName="entity" localName="add-entity-entity" itemName="entity" defaultValue="#[payload]" caption="Entity" description="Map that represents the entity." required="false" javaType="java.util.Map&lt;java.lang.String,java.lang.Object&gt;"></element-controller-map>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+  <cloud-connector returnType="java.lang.String" categories="DataSenseResolver" caption="Greet" icon="icons/theme.classic/gitlabconnect-connector-small.png" localId="greet" image="icons/theme.classic/gitlabconnect-connector-large.png" abstract="true" extends="http://www.mulesoft.org/schema/mule/gitlabconnect/abstractGitlabconnectConnectorGeneric" metaData="static">
+    <attribute-category caption="General" description="General.">
+      <group id="general" caption="General">
+        <string name="friend" caption="Friend" description="Name to be used to generate a greeting message." required="true" javaType="java.lang.String"></string>
+      </group>
+    </attribute-category>
+  </cloud-connector>
+</namespace>
